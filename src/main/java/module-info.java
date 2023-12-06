@@ -3,7 +3,6 @@ module com.example.media_proyect {
     requires javafx.fxml;
     requires java.sql;
 
-
     opens com.example.media_proyect to javafx.fxml;
     opens com.example.media_proyect.models;
     opens com.example.media_proyect.db;

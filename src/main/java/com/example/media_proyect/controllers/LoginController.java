@@ -13,13 +13,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable, EventHandler {
@@ -54,11 +58,11 @@ public class LoginController implements Initializable, EventHandler {
             }
             switch(user.getMembresia()){
                 case "premium":
-                    createWindow("InterfaceP", 750,600);
+                    createWindow("interfaz", 750,600);
                     closeWindow();
                     break;
                 case "basico":
-                    createWindow("NewPay",700,600);
+                    createWindow("interfaz",700,600);
                     closeWindow();
                     break;
                 default:
@@ -74,10 +78,24 @@ public class LoginController implements Initializable, EventHandler {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Image image = new Image(getClass().getResource("/images/skzflix.jpg").toString());
-        //skzflix.setImage(image);
+        //Image image = new Image(Objects.requireNonNull(this.getClass().getClassLoader().getResource("images/skzflix.jpg")).toString());
+        Image image = new Image(new File("src/main/java/com/example/media_proyect/imagenes/skzflix.jpg").toURI().toString());
+        skzflix.setImage(image);
         btnLogin.setOnAction(this);
         btnSub.setOnAction(this);
+    }
+
+    private Image loadImageFromResource(String path) {
+        // Obtener el InputStream de la imagen desde resources
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(path);
+
+        if (inputStream != null) {
+            // Crear la imagen desde el InputStream
+            return new Image(inputStream);
+        } else {
+            System.out.println("No se pudo cargar la imagen desde resources: " + path);
+            return null;
+        }
     }
 
     private void closeWindow() {
