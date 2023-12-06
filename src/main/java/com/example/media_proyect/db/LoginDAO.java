@@ -1,32 +1,37 @@
 package com.example.media_proyect.db;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.example.media_proyect.models.Login;
+import com.example.media_proyect.models.Usuarios;
+
+import javax.xml.transform.Result;
+import java.sql.*;
 
 public class LoginDAO {
     private Connection conn;
 
-    public LoginDAO(Connection conn){
-        this.conn=conn;
+    public LoginDAO(){
     }
 
-    public String getUser(String name, String password){
+    public Login login(String correo) throws SQLException {
+        Login login = null;
+        conn = MySQLConnection.getConnection();
+        String consulta = "select u.correo as correo, u.contrasenia as contraseña, tp.nombre as tipo from usuarios u join tipo_usuario tp on u.id_tipo_usuario=tp.id where correo=?";
         try{
-            String query = "select usuarios " +
-                    "from tipoUsuario " +
-                    "where tipo in (select tipo " +
-                    "from usuario " +
-                    "where nombre=\""+name+"\" and password=\""+password+"\")";
-           Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next())
-                return rs.getString("usuarios");
-        } catch (SQLException ex)
+            assert conn == null;
+            try (PreparedStatement statement = conn.prepareStatement(consulta)) {
+                statement.setString(1, correo);
+                ResultSet rs = statement.executeQuery();
+                while(rs.next()) {
+                    login = new Login(rs.getString("correo"), rs.getString("contraseña"), rs.getString("tipo"));
+                }
+                return login;
+            }
+        } catch (SQLException sqlException)
         {
-            ex.printStackTrace();
+            System.out.println(sqlException.getMessage());
+        } finally {
+            conn.close();
         }
-        return "";
+        return login;
     }
 }
