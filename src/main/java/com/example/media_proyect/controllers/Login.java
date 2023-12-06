@@ -1,4 +1,4 @@
-package com.example.media_proyect.models;
+package com.example.media_proyect.controllers;
 
 import com.example.media_proyect.HelloApplication;
 import com.example.media_proyect.db.LoginDAO;
@@ -24,16 +24,20 @@ public class Login implements Initializable, EventHandler {
 
     @FXML
     ImageView skzflix;
+    @FXML
     Button btnLogin, btnSub, btnCancel;
+    @FXML
     TextField txtPassword, txtUser;
     Connection conn = MySQLConnection.getConnection();
     LoginDAO userDAO = new LoginDAO(conn);
 
     @Override
     public void handle(Event event) {
+        System.out.println("HOLA HOLA");
 
-        if((Button) event.getSource()==btnLogin)
+        if(event.getSource()==btnLogin)
         {
+            System.out.println("HOLA MUNDO");
             String user = userDAO.getUser(txtUser.getText(),txtPassword.getText());
             switch(user){
                 case "Premium":
@@ -57,8 +61,9 @@ public class Login implements Initializable, EventHandler {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Image image = new Image(getClass().getResource("/images/skzflix.jpg").toString());
-        skzflix.setImage(image);
+        System.out.println("HOLA");
+        //Image image = new Image(getClass().getResource("/images/skzflix.jpg").toString());
+        //skzflix.setImage(image);
         btnLogin.setOnAction(this);
         btnSub.setOnAction(this);
     }

@@ -1,39 +1,32 @@
 package com.example.media_proyect.models;
 
 public class Usuarios {
-    private String cvusuario;
+    private Integer id;
     private String nombre;
-    private String password;
-    private String tipo;
+    private String apellidos;
+    private String correo;
+    private String contrasenia;
+    private String domicilio;
+    private String telefono;
+    private int idTipoUsuario;
 
-    public Usuarios(){
-        cvusuario="";
-        nombre="";
-        password="";
-        tipo="";
-    }
-
-    public Usuarios(String cvusuario, String nombre, String password, String tipo) {
-        this.cvusuario = cvusuario;
+    public Usuarios(Integer id, String nombre, String apellidos, String correo, String contrasenia, String domicilio, String telefono, int idTipoUsuario) {
+        this.id = id;
         this.nombre = nombre;
-        this.password = password;
-        this.tipo = tipo;
+        this.apellidos = apellidos;
+        this.correo = correo;
+        this.contrasenia = contrasenia;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.idTipoUsuario = idTipoUsuario;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getCvusuario() {
-        return cvusuario;
-    }
-
-    public void setCvusuario(String cvusuario) {
-        this.cvusuario = cvusuario;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -44,11 +37,51 @@ public class Usuarios {
         this.nombre = nombre;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public int getIdTipoUsuario() {
+        return idTipoUsuario;
+    }
+
+    public void setIdTipoUsuario(int idTipoUsuario) {
+        this.idTipoUsuario = idTipoUsuario;
     }
 }
