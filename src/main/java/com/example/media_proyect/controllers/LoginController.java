@@ -56,13 +56,19 @@ public class LoginController implements Initializable, EventHandler {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+            if (!user.getCotrasenia().equals(txtPassword.getText().trim()))
+            {
+                return;
+            }
             switch(user.getMembresia()){
                 case "premium":
+                    System.out.println("premium");
                     createWindow("interfaz", 750,600);
                     closeWindow();
                     break;
                 case "basico":
-                    createWindow("interfaz",700,600);
+                    System.out.println("basic");
+                    createWindow("perfil",700,600);
                     closeWindow();
                     break;
                 default:
